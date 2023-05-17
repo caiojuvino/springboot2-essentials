@@ -44,4 +44,11 @@ public class AnimeController {
         animeService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @PutMapping
+    public ResponseEntity<Void> replace(@RequestBody Anime anime){
+        log.info("Update Anime " + dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        animeService.replace(anime);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
