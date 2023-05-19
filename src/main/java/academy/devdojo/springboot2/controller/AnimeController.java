@@ -24,14 +24,20 @@ public class AnimeController {
 
     @GetMapping
     public ResponseEntity<List<Anime>> list(){
-        log.info("List Animes " + dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        log.info("List All Animes " + dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         return new ResponseEntity<>(animeService.listAll(), HttpStatus.OK);
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<Anime> findById(@PathVariable Long id){
-        log.info("Find Anime " + dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        log.info("Find Anime by Id " + dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         return ResponseEntity.ok(animeService.findByIdOrThrowBadRequestException(id));
+    }
+
+    @GetMapping(path = "/find")
+    public ResponseEntity<List<Anime>> findByName(@RequestParam String name){
+        log.info("Find Anime by Name " + dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        return ResponseEntity.ok(animeService.findByName(name));
     }
 
     @PostMapping
